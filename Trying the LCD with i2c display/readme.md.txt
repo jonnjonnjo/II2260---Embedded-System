@@ -1,1 +1,0 @@
-![Configuration](configuration.png)
