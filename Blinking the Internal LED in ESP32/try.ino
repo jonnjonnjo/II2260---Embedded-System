@@ -6,6 +6,7 @@ void setup() {
 }
 
 void loop() {
+  // you can adjust your delay here. I make the LED turned on every 50 ms
   delay(50);
   digitalWrite(LED,HIGH);
   delay(50);
