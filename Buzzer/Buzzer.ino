@@ -15,7 +15,7 @@ int melody[] = {
 
 int noteDurations[] = {
   4, 8, 8, 4, 4, 4, 4, 4
-}; 
+};
 
 void setup() {
   for (int thisNote = 0; thisNote < 8; thisNote++) {
