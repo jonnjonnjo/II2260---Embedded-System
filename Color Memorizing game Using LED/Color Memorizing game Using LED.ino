@@ -25,7 +25,7 @@ void blinkAll();
 void lightAll();
 void makeSequence();
 void showSequence();
-void showLed(int idx, int time);
+void showLed(int idx, int time, int time_delay);
 void check();
 void reset();
 
@@ -62,7 +62,7 @@ void check()
     else
     {
       //.println("Here in yellow ");
-      showLed(1,1000);
+      showLed(1,1000,1000);
       reset();
       return;
     }
@@ -72,7 +72,7 @@ void check()
     else
     {
       //.println("Here in G ");
-      showLed(1,1000);
+      showLed(1,1000,1000);
       reset();
       return;
     }
@@ -81,7 +81,7 @@ void check()
     if(stateYellow && stateRed && !stateGreen && stateGreenBefore && stateRedBefore && stateYellowBefore) pointer++;
     else
     {
-      showLed(1,1000);
+      showLed(1,1000,1000);
       reset();
       return;
     }
@@ -94,38 +94,43 @@ void check()
 
   if(pointer == maxn)
   {
-    showLed(2,1000);
+    showLed(2,1000,1000);
     reset();
     return;
   }
 }
 
-void showLed(int idx, int time = 500)
+void showLed(int idx, int time = 500,int timeDelay = -1)
 {
+  if(timeDelay == -1) timeDelay = time;
   if(idx == 0)
   {
     digitalWrite(ledYellow,HIGH);
     delay(time);
     digitalWrite(ledYellow,LOW);
-    delay(time);
+    delay(timeDelay);
   }else if(idx == 1)
   {
     digitalWrite(ledRed,HIGH);
     delay(time);
     digitalWrite(ledRed,LOW);
-    delay(time);   
+    delay(timeDelay);   
   }else
   {
     digitalWrite(ledGreen,HIGH);
     delay(time);
     digitalWrite(ledGreen,LOW);
-    delay(time);
+    delay(timeDelay);
   }
 }
 
 void showSequence()
 {
-  for(int i = 0;i < maxn;i++) showLed(gameSequence[i]);
+  for(int i = 0;i < maxn;i++)
+  {
+    if(i < maxn-1) showLed(gameSequence[i]);
+    else showLed(gameSequence[i],500,0);
+  }
 }
 
 void makeSequence()
