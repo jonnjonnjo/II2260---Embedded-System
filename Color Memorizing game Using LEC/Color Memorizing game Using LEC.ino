@@ -58,25 +58,27 @@ void check()
 
   if(gameSequence[pointer] == 0)
   {
-    if(!stateYellow && stateGreen && stateRed) pointer++;
+    if(!stateYellow && stateGreen && stateRed && stateGreenBefore && stateRedBefore && stateYellowBefore) pointer++;
     else
     {
+      //.println("Here in yellow ");
       showLed(1,1000);
       reset();
       return;
     }
   }else if(gameSequence[pointer] == 1)
   {
-    if(stateYellow && !stateRed && stateGreen) pointer++;
+    if(stateYellow && !stateRed && stateGreen  && stateGreenBefore && stateRedBefore && stateYellowBefore) pointer++;
     else
     {
+      //.println("Here in G ");
       showLed(1,1000);
       reset();
       return;
     }
   }else
   {
-    if(stateYellow && stateRed && !stateGreen) pointer++;
+    if(stateYellow && stateRed && !stateGreen && stateGreenBefore && stateRedBefore && stateYellowBefore) pointer++;
     else
     {
       showLed(1,1000);
@@ -167,6 +169,7 @@ void setup()
   pinMode(buttonYellow,INPUT_PULLUP);
   pinMode(buttonRed,INPUT_PULLUP);
   pinMode(buttonGreen,INPUT_PULLUP);
+  //.begin(9600);
 }
 
 void loop()
