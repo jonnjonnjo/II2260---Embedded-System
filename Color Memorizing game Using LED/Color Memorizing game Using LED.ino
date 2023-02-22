@@ -91,6 +91,7 @@ void check()
   stateRedBefore = stateRed;
   stateGreenBefore= stateGreen;
   stateYellowBefore = stateYellow;
+  delay(1);
 
   if(pointer == maxn)
   {
