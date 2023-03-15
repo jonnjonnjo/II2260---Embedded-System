@@ -2,6 +2,14 @@
 #define backwardButton  23
 #define stoppedButton 1
 #define forwardButton 3
+int motor1Pin1 = 27; 
+int motor1Pin2 = 26; 
+int enable1Pin = 14; 
+// Setting PWM properties
+const int freq = 30000;
+const int pwmChannel = 0;
+const int resolution = 8;
+int dutyCycle = 200;
 
 int backwardStateBefore = 0, stoppedStateBefore = 0, forwardStateBefore = 0;
 int backwardStateNow, stoppedStateNow, forwardStateNow;
@@ -21,11 +29,21 @@ void setup() {
   pinMode(backwardButton,INPUT_PULLUP);
   pinMode(stoppedButton,INPUT_PULLUP);
   pinMode(stoppedButton,INPUT_PULLUP);
+
+  pinMode(motor1Pin1, OUTPUT);
+  pinMode(motor1Pin2, OUTPUT);
+  pinMode(enable1Pin, OUTPUT);
+
+  // configure LED PWM functionalitites
+  ledcSetup(pwmChannel, freq, resolution);
+  
+  // attach the channel to the GPIO to be controlled
+  ledcAttachPin(enable1Pin, pwmChannel);
   
 }
 
 void loop() {
-  lcd.setCursor(0,1);
+
   
   // input the button condition now
   backwardStateNow = !digitalRead(backwardButton);
@@ -41,23 +59,42 @@ void loop() {
 
   // test 3 case
   // in case it wants to go backward
-  if(backwardStateNow == 1 && stoppedStateNow == 0 && forwardStateNow = 0)
+  if(backwardStateNow == 1 && stoppedStateNow == 0 && forwardStateNow ==0)
   {
+  lcd.clear();
+   lcd.setCursor(0,0);  
+  lcd.print("Condition : ");
+  lcd.setCursor(0,1);
       lcd.print("Moving Backwards");
-      
+      digitalWrite(motor1Pin1, HIGH);
+      digitalWrite(motor1Pin2, LOW); 
   }
 
   // in case it wants to go forward
 
   if(backwardStateNow == 0 && stoppedStateNow == 0 && forwardStateNow == 1)
   {
-
+  lcd.clear();
+   lcd.setCursor(0,0);  
+  lcd.print("Condition : ");
+  lcd.setCursor(0,1);
+      lcd.print("Moving Forwards");
+      digitalWrite(motor1Pin1,LOW); 
+      digitalWrite(motor1Pin2,HIGH);
   }
 
 
   // in case it wants to go stop
-  if(backwardStateNow == 0 && stoppedStateNow == 1 && forwardStateNow == )
-
+  if(backwardStateNow == 0 && stoppedStateNow == 1 && forwardStateNow == 0)
+  {
+  lcd.clear();
+   lcd.setCursor(0,0);  
+  lcd.print("Condition : ");
+  lcd.setCursor(0,1);
+      lcd.print("Stopped");
+      digitalWrite(motor1Pin1,LOW);
+      digitalWrite(motor1Pin2,LOW);
+  }
 
 
   // set the previous state
