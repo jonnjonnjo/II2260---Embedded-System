@@ -7,7 +7,7 @@ LiquidCrystal_I2C lcd(0x27,16,2);  // set the LCD address to 0x27 for a 16 chars
 // The LCD address might located differently for different ESP
 
 void setup() {
-  lcd.init();
+  lcd.begin();
   lcd.clear();         
   lcd.backlight();      // Make sure backlight is on
   
