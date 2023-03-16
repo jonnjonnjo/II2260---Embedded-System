@@ -67,5 +67,5 @@ void loop() {
     dutyCycle = dutyCycle + 5;
     delay(500);
   }
-  dutyCycle = 0;
+  dutyCycle = 200;
 }
