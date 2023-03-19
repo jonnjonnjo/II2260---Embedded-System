@@ -71,9 +71,17 @@ void loop() {
   temperature = bmx280.getTemperature();
   lcd.clear();
   lcd.setCursor(0,0);
+  lcd.print("Temp : ");
+  lcd.setCursor(7,0);
   lcd.print(temperature,1);
+  lcd.setCursor(11,0);
+  lcd.print(" C");
   lcd.setCursor(0,1);
-  lcd.print(pressure);
+  lcd.print("P: ");
+  lcd.setCursor(3,1);
+  lcd.print(pressure,1);
+  lcd.setCursor(11,1);
+  lcd.print(" atm ");
 
 
   // just checking in the serial monitor
