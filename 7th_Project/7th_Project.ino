@@ -22,7 +22,7 @@ LiquidCrystal_I2C lcd(0x27,16,2);
 BluetoothSerial SerialBT;
 String message = "";
 char incomingChar;
-
+String help[] = {"LCD Display","Temperature","Pressure","Light","Show here","Print to LCD display"};
 
 void setup() {
   Serial.begin(115200);
@@ -38,7 +38,7 @@ void setup() {
   Wire.begin(I2C_SDA, I2C_SCL);
   if (!bmx280.begin())
   {
-    SerialBT.println("begin() failed. check your BMx280 Interface and I2C Address.");
+    SerialBT.println("You can't use the BMP sensor right now.");
   }
   bmx280.resetToDefaults();
   bmx280.writeOversamplingPressure(BMx280MI::OSRS_P_x16);
