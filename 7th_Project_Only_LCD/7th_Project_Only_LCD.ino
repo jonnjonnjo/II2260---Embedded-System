@@ -54,7 +54,7 @@ void loop() {
   {
     printInLCD = 0;
   }
-  else if(wantToPrint) // in case you want to print some string
+  else if(wantToPrint && message != "") // in case you want to print some string
   {
     if(printInLCD)
     {
@@ -63,7 +63,7 @@ void loop() {
       lcd.print(message);
       if(message.length() > 16)
       {
-        for(int i =0;i + 15 < message.length();i++)
+        for(int i =0;i + 16 < message.length();i++)
         {
           lcd.setCursor(i,1);
           lcd.print(message[i+15]);
@@ -73,10 +73,13 @@ void loop() {
     {
       for(int i =0;i < message.length();i++) SerialBT.write(message[i]);
     }
+
+    wantToPrint = 0;
   }
   else if(message == "Print") // declare that you want to print something
   {
     wantToPrint = 1;
+    message = "";
   }else if(message == "Temperature") // ask about the temperature
   {
     if(printInLCD)
@@ -112,7 +115,7 @@ void loop() {
       lcd.setCursor(0,1);
       lcd.print(humidity);
       lcd.setCursor(5,1);
-      lcd.print(" °C");
+      lcd.print(" %");
     }else
     {
       for(int i =0;i < message.length();i++) SerialBT.write(message[i]);
