@@ -27,7 +27,7 @@ String greenState = "off";
 
 // Assign output variables to GPIO pins
 const int redPin = 23;
-const int yellowPin = 18;
+const int yellowPin = 19;
 const int greenPin = 3;
 
 // Current time
@@ -56,11 +56,11 @@ void setup() {
   
   //begin() checks the Interface, reads the sensor ID (to differentiate between BMP280 and BME280)
   //and reads compensation parameters.
-  if (!bmx280.begin())
-  {
-    Serial.println("begin() failed. check your BMx280 Interface and I2C Address.");
-    while (1);
-  }
+  //if (!bmx280.begin())
+  //{
+    //Serial.println("begin() failed. check your BMx280 Interface and I2C Address.");
+  // while (1);
+ // }
 
   bmx280.begin();
   if (bmx280.isBME280())
@@ -124,10 +124,10 @@ void loop(){
   }
 
   //wait for the measurement to finish
-  do
-  {
-    delay(100);
-  } while (!bmx280.hasValue());
+ // do
+ // {
+ //   delay(100);
+//  } while (!bmx280.hasValue());
 
   //  Serial.print("Pressure: "); Serial.println(bmx280.getPressure());
   //  Serial.print("Pressure (64 bit): "); Serial.println(bmx280.getPressure64());
@@ -167,7 +167,7 @@ void loop(){
               digitalWrite(yellowPin, HIGH);
             }else if (header.indexOf("GET /1/off") >= 0) {
               Serial.println("GPIO 1 off");
-              redState = "off";
+              yellowState = "off";
               digitalWrite(yellowPin,LOW);
             }else if (header.indexOf("GET /3/on") >= 0) {
               Serial.println("GPIO 3 on");
